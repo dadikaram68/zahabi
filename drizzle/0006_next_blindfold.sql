@@ -1,0 +1,1 @@
+ALTER TABLE `accounting_price_lists` MODIFY COLUMN `currencyCode` varchar(3) NOT NULL DEFAULT 'USD';

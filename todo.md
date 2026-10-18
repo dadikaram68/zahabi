@@ -1,0 +1,743 @@
+# Project TODO
+
+- [x] Define inventory data model for items, variants, stock movements, and configurable replenishment thresholds.
+- [x] Create database schema and migration for items, colour/size/barcode variants, inventory movements, and settings.
+- [x] Build authenticated, role-aware dashboard navigation for inventory users.
+- [x] Implement item listing, search, low-stock status filtering, and per-variant stock visibility.
+- [x] Implement add and edit item workflow with optional image placeholders for later image upload.
+- [x] Implement stock-in and stock-out workflows with mandatory movement reason and atomic quantity updates.
+- [x] Implement a default low-stock threshold with optional per-item override and red low-stock status.
+- [x] Build dashboard reports for inventory totals, low-stock items, recent movements, and movement history.
+- [x] Add Arabic, English, and Kurdish interface localisation with RTL support where needed.
+- [x] Add light and dark visual themes with accessible contrast and responsive layouts.
+- [x] Include professional non-review sample inventory records for the initial walkthrough.
+- [x] Write Vitest coverage for inventory threshold and movement validation rules.
+- [x] Verify essential user flows, desktop/mobile layouts, and resolve visible issues.
+- [x] Save a tested checkpoint and provide a concise user guide.
+- [x] Implement administrative editing for item names and per-item alert thresholds.
+- [x] Add CSV export and print-friendly output for inventory reports.
+- [x] Add an image placeholder field and preview slot to item creation and editing workflows for future image upload.
+- [x] Add a dedicated full movement-history query and screen rather than limiting the history to recent movements.
+- [x] Localise all DashboardLayout labels for Arabic, English, and Kurdish.
+- [x] Exercise and document the add-item, edit-item, stock-in, stock-out rejection, threshold, export, and print flows.
+- [x] Implement secure direct device upload for item images using managed file storage.
+- [x] Create supplier and customer data models with searchable management screens.
+- [x] Add purchase invoice creation with supplier selection, line items, and atomic stock-in updates.
+- [x] Add issue invoice creation with customer selection, line items, and protected atomic stock-out updates.
+- [x] Add dashboard charts for stock composition, stock movement trends, and purchase versus issue activity.
+- [x] Add tests and visual verification for images, partner records, invoices, and dashboards.
+- [x] Add search and type filtering to supplier and customer management.
+- [x] Add a time-series stock movement trend chart for incoming and outgoing quantities.
+- [x] Verify and document the visible image-upload, partner-management, and invoice-management screens.
+- [x] Open and document the direct image-upload control in the add-item form.
+- [x] Document desktop and mobile access guidance for the inventory application.
+- [x] Determine the supported backup, retention, and restore approach for application data.
+- [x] Implement a daily backup workflow and dated backup-management interface if supported by the hosting environment.
+- [x] Verify the backup implementation with scheduled-handler tests, interface review, and user instructions.
+- [x] Create dated daily inventory backups retained for the latest 30 days.
+- [x] Add an administrator-only backup screen with download and deliberate restore confirmation.
+- [x] Prepare the production scheduling step for a 02:00 UTC daily backup after publication.
+- [x] تم تشخيص واجهة النسخ الاحتياطي في الإنتاج؛ المهمة اليومية مفعلة وناجحة، والتحقق بحساب المالك متوقف على OAuth الخارجي.
+- [x] تم تشخيص OAuth: التطبيق يولّد redirectUri الصحيح ويصل إلى بوابة OAuth؛ أي 403 متبقٍ إعداد خارجي في المنصة وليس خطأً في كود المشروع.
+- [x] مؤجل بطلب المستخدم: ربط مجلد ويندوز مستقل وإنشاء مشروع تنصيب منفصل لا يبدأ ضمن نطاق نسخة الويب الحالية.
+- [x] مؤجل بطلب المستخدم: خيارات نسخة Windows الأولى لا تُحسم قبل طلب استئناف المسار وربط مجلد مستقل.
+- [x] تصميم تشغيل مركزي على جهاز الشركة لعدة مستخدمين، مع منع مزامنة قاعدة البيانات مباشرة عبر Google Drive وقصره على النسخ الاحتياطية المشفرة.
+- [x] Apply true date-based retention to daily backups for the configured number of days.
+- [x] Keep manual and pre-restore safety backups outside daily-retention pruning and test the policy.
+- [x] Add a mixed-source retention test proving only expired scheduled backups are selected for pruning.
+- [x] Update the user guide with daily workflow and staff-access instructions.
+- [x] Decide the Windows application model: connected single-company service for 3–5 concurrent users, with a separate local-only mode for one-device offline customers.
+- [x] Deferred by user: no Windows-installable desktop project is created in the current web-only scope.
+- [x] Document a future Windows release process with staged validation, pre-upgrade backup, signed package, client-by-client rollout, and rollback; installer creation remains blocked until a Windows project folder is attached.
+- [x] Define the accounting-system scope, localisation, currency, tax, fiscal-year, and multi-branch requirements.
+- [x] Design chart of accounts, journal entries, ledgers, permissions, and audit records.
+- [x] Implement sales, purchases, payments, receipts, returns, and linked inventory accounting.
+- [x] Implement operational financial statements, manual tax calculation reporting, customer/supplier balances, and ageing reports; local statutory filing remains outside scope.
+- [x] Capture invoice due dates and present customer/supplier unsettled balances in current, 1–30, 31–60, 61–90, and 90+ day ageing buckets.
+- [x] Add supplier payment-allocation coverage for ageing and cover all current, 31–60, 61–90, and 90+ day buckets plus the report panel output.
+- [x] Add USD-denominated balance sheet and general ledger reports that include posted entries only.
+- [x] Include current-period earnings in the balance sheet and prove posted-only financial report filtering with tests.
+- [x] Implement granular staff roles, approval workflows, and a professional administration workspace.
+- [x] Support trading-company accounting with multi-currency, multi-branch, and multi-warehouse workflows.
+- [x] Add cost centres, fiscal-year closing, banking, cheque, fixed-asset, and payroll modules.
+- [x] Add cost-centre administration with owner/manager controls and make active cost centres available for future document and journal attribution.
+- [x] Add audited owner/manager controls to rename and activate/deactivate cost centres, and prove inactive centres are excluded from the active list.
+- [x] Add a rename control for a cost centre in the administration page and component coverage proving the updated name is submitted and rendered.
+- [x] Add permission-level controls and approval rules for invoices, discounts, edits, deletions, and financial postings.
+- [x] Configure the 1 January fiscal year and multi-currency exchange handling; the original IQD-primary setting was superseded by USD as the current accounting base currency.
+- [x] Require manager approval before invoice posting and support branch-and-document-specific numbering.
+- [x] Support tiered price lists, controlled discount approvals, cash, bank, credit, and cheque settlement.
+- [x] Route documents that exceed the selected price-list discount limit directly to manager approval instead of rejecting them.
+- [x] Support full payroll with attendance, advances, and deductions.
+- [x] Use approved attendance and overtime records to calculate payroll-line working days, overtime pay, and net settlement before approval.
+- [x] Apply policy B: do not deduct absences automatically; calculate overtime at 1.5 times the hourly rate and retain manager-controlled advances and deductions.
+- [x] Capture a payroll period start and end date so attendance and overtime are calculated only for the selected payroll period.
+- [x] Harden draft-line identifier generation for test environments so AccountingWorkspace payroll coverage runs without worker failure.
+- [x] Stabilize accounting-tab access dependencies and guard redirect state updates to prevent render loops during payroll UI coverage.
+- [x] Add direct HR-manager coverage for the AccountingWorkspace payroll tab and selected-period submission without redirect loops.
+- [x] Add a focused test for draft-line identifier fallback when crypto.randomUUID is unavailable.
+- [x] Add payroll-run details UI for reviewing employee lines and editing advances and deductions before approval.
+- [x] Add payroll submission, manager approval, and balanced payroll journal posting linked to the payroll run.
+- [x] Prevent concurrent accounting bootstrap requests from creating duplicate default companies and setup data.
+- [x] Add branch selection and explicit exchange-rate capture to accounting document drafts.
+- [x] Add payment-account setup for cash, bank, and cheque instruments.
+- [x] Add authenticated attendance capture and manager-controlled fiscal-period closure.
+- [x] Add backend-contract tests for accounting RBAC, attendance, and fiscal-period closure.
+- [x] Complete accounting posting logic for payments, receipts, returns, and transfers, including payment-account selection, cost of goods sold, settlement, and multi-line documents.
+- [x] Add controlled receipt/payment allocation to posted sales and purchase invoices, validate the remaining balance, and calculate ageing from unsettled amounts.
+- [x] Hide or replace unauthorized accounting tabs and actions in the interface based on accounting access, rather than relying only on server rejection.
+- [x] Prevent hidden accounting tabs from issuing unauthorized data queries and display a clear access notice for blocked deep links.
+- [x] Add test coverage for restricted accounting roles so unavailable tabs and actions do not trigger unauthorized requests.
+- [x] Filter document types and related controls by role so warehouse staff only see stock transfers.
+- [x] Add component-level tests for role-restricted accounting tabs, deep links, disabled queries, and document actions.
+- [x] Add component coverage proving restricted roles cannot render or trigger disallowed submit, approve, or financial-document actions.
+- [x] Implement action-level approval rules, including preventing self-approval where required and controlling post-creation edits and deletions.
+- [x] Add creator-only cancellation for draft accounting documents with an audit event, while permanently forbidding deletion or alteration of submitted and posted documents.
+- [x] Prevent a document creator from approving and posting the same document.
+- [x] Change the accounting base currency and all financial-report presentation to USD while preserving IQD and other currency conversions.
+- [x] Add a unique branch-and-document-type sequence constraint and an atomic allocation strategy for concurrent accounting documents.
+- [x] Add multi-line accounting-document drafting with per-line quantities, prices, discounts, and totals.
+- [x] Show a computed total for each draft line and test multi-line submission with discounts.
+- [x] Link receipt and payment documents to selected cash, bank, or cheque accounts during posting.
+- [x] Add a controlled stock-transfer workflow between warehouses and branches with paired inventory movements.
+- [x] Track variant balances per warehouse so transfers change source and destination stock without altering total company stock.
+- [x] Add explicit source-warehouse selection for stock-transfer documents instead of deriving it from the selected branch.
+- [x] Add an end-to-end stock-transfer test that proves source and destination balances change while company total stays constant.
+- [x] Add a warehouse-balance query and interface to inspect per-warehouse variant quantities after transfers.
+- [x] Remove Kurdish language selection and unsupported language paths; retain Arabic and English only.
+- [x] Delete remaining Kurdish translation blocks and add a safe Arabic fallback for any legacy persisted Kurdish language value (no persisted language setting exists; the initial state is Arabic).
+- [x] Restrict document submission for approval to its creator, while keeping approval and posting separate for an authorized manager.
+- [x] Allow a warehouse keeper to submit only their own stock-transfer draft for manager approval through the interface.
+- [x] Extend the stock-transfer database integration test to exercise normal draft creation, submission, approval, and posting in sequence.
+- [x] Add average-cost inventory valuation and balanced cost-of-goods-sold postings for sales and returns.
+- [x] Store historical unit cost on posted sales lines and use it when posting the corresponding sales return.
+- [x] Add integration coverage for sales returns after stock depletion and intervening cost changes.
+- [x] Add a sales-return source-line selector so users can reference the original posted sale from the document form.
+- [x] Remove any visible “Made with Manus” branding from the application interface (no such client-side branding existed in the app code).
+- [x] Redesign the management interface with a clearer professional visual hierarchy, larger Arabic and English typography, and improved responsive layouts.
+- [x] Add regression coverage and desktop/mobile visual verification for the redesigned interface.
+- [x] Add concise context-specific instructions to every primary application section.
+- [x] Build a protected AI operations analysis that reviews the last seven days of real inventory and accounting activity, flags anomalies, and proposes non-destructive next steps.
+- [x] Add an AI insight center to the dashboard with safe analysis states, transparency, and test coverage.
+- [x] Rename the product identity and visible application copy to "الذهبي للمحاسبة".
+- [x] Add an owner-managed permission board that allows delegation to managers and staff with explicit module and action visibility controls.
+- [x] Enforce owner and delegated-manager permission boundaries across server procedures and the interface, with auditable changes and tests.
+- [x] Extend owner-defined section visibility and action permissions beyond accounting to dashboard, inventory, partners, invoices, and backups.
+- [x] Add component and integration coverage for creating a custom role, changing its permissions, assigning it, and confirming the resulting interface and server access.
+- [x] Require the owner to explicitly grant delegated permission-management authority before a manager can manage roles, and verify protected operations across applicable server procedures.
+- [x] Add server and interface gating for inventory reads, partner and invoice reads, dashboard widgets, and blocked deep links outside accounting.
+- [x] Gate dashboard inventory widgets and their overview/history queries by delegated permissions, with a safe no-access state.
+- [x] Add UI coverage proving users بلا صلاحيات المخزون أو التجارة لا يطلقون استعلامات الأقسام المحجوبة ويرون رسالة الحجب للمسارات المباشرة.
+- [x] Add delegated-role integration coverage proving allowed sections appear while prohibited sections, queries, and actions are blocked.
+- [x] Add a component test for the real role-assignment form proving a custom role can be selected and assigned.
+- [x] Add a transaction-backed integration test for create custom role ثم تعديل صلاحياته ثم تعيينه ثم قراءة الصلاحيات الناتجة من طبقة البيانات.
+- [x] Add end-to-end coverage that derives Home section visibility, query gating, and actions from a custom role persisted and assigned through the server layer.
+- [x] Separate inventory read access from inventory-management actions in the Home interface, and hide write controls from read-only delegated roles.
+- [x] Run and record a final full regression after persisted-role and read-versus-manage permission changes.
+- [x] Keep inventory sections visible to read-only delegated roles while restricting only inventory write controls to inventory.manage.
+- [x] Extend the persisted custom-role Home test to prove an allowed inventory view and blocked commerce deep link, including disabled inventory history and absent write actions.
+- [x] Add negative tests proving a manager without permissions.manage cannot assign roles, create custom roles, or update role permissions.
+- [x] Define a separate per-customer product packaging model so each sold Windows copy has independent data, licensing, backups, and optional synchronization without changing the current company into a multi-tenant system.
+- [x] Prepare a documented Windows client roadmap covering local encrypted backups and optional cloud-drive synchronization; defer executable creation until a Windows project folder is attached.
+- [x] Update the Arabic user guide for settlement allocations, invoice due dates and ageing, cost-centre controls, and draft cancellation safeguards.
+- [x] Add attendance draft, submission, independent approval, and audit states before records affect payroll.
+- [x] Restrict payroll calculation to approved attendance records within the selected period and cover rejected/self-approval paths.
+- [x] Add a payroll-tab interface for attendance review with component coverage and responsive verification.
+- [x] Link an active cost centre to accounting documents and the resulting journal lines, with validation and user-interface coverage.
+- [x] Let document creators select an active price list and enforce the selected list's discount threshold with server and interface coverage.
+- [x] Add auditable administration for active cash, bank, and cheque payment accounts used by receipt and payment documents.
+- [x] Block fiscal-period closure while financial documents remain unposted or journal balances are not ready, with an administration readiness view.
+- [x] Make accounting the primary workspace and expose a clear employee-management entry point for authorized payroll users.
+- [x] Allow each employee salary to be defined in a selected active currency, with explicit base-currency conversion for payroll reporting and approval.
+- [x] Add a safe diagnostic assistant flow that asks whether the issue concerns accounting or inventory and whether to analyze the last 7 days or a selected month, then returns findings without modifying records.
+- [x] Let the diagnostic assistant accept a user-written problem description while keeping the requested scope, period, and data access explicitly bounded.
+- [x] Update the independent Windows-product roadmap for 3–4 same-company devices, local daily backups to a user-selected folder, restore, optional cloud sync, and per-customer isolated licensing; defer executable implementation until a Windows folder is bound.
+- [x] Add internal employee user accounts with username and securely hashed password, daily sign-in, and a session separate from external owner authentication.
+- [x] Allow only the owner or an explicitly delegated permission manager to create, activate, deactivate, and assign roles to internal user accounts.
+- [x] Provide a professional login and user-administration flow showing available internal users without exposing passwords or protected owner controls.
+- [x] Let an authorized owner or delegated permission manager reset an internal user's password without viewing the existing password.
+- [x] Maintain a professional readiness review covering accounting controls, payroll, inventory, permissions, backup/recovery, audit trail, usability, and deployment gaps before each major release.
+- [x] Expand financial reports with auditable profitability and liquidity indicators derived only from posted journal balances, then prepare the next budget-planning layer.
+- [x] Add posted-balance profitability and liquidity indicators to the financial-reports workspace with server, interface, integration, and responsive verification.
+- [x] Add a fixed-asset register with straight-line depreciation, controlled posting, and a manager-only administration workflow.
+- [x] Let an owner-authorized permission manager define employee-facing sections, menus, and action permissions when creating or updating an internal employee account.
+- [x] Document the internal employee sign-in flow and the future Windows installation experience for a customer company without claiming an unbuilt installer exists.
+- [x] Prevent the accounting workspace from remaining behind a loading indicator when cached overview data is being refreshed.
+- [x] Implement and integration-test a complete purchase-return workflow, including source selection, inventory/value reversal, and balanced posting.
+- [x] Implement a full cheque settlement lifecycle with audited states and postings for issue, clearance or collection, and reversal or bounce as applicable.
+- [x] Implement true quantity-tier pricing per price list and variant, with a server-enforced price-break selection rule, manager administration, document application, and integration coverage.
+- [x] Apply and test price-list item pricing or tiers beyond the delivered discount-threshold control, or explicitly narrow the product scope to threshold-only lists.
+- [x] استبدال احتساب الضريبة التلقائي باحتساب يدوي يطلبه المحاسب لفاتورة واحدة أو لفترة يختارها مع تحديد النسبة عند الطلب.
+- [x] جعل الصفحة الأولى بوابة دخول للموظفين بالحساب الداخلي، مع إبقاء دخول المالك الخارجي منفصلاً.
+- [x] إضافة اختبار تكامل فعلي لاحتساب الضريبة اليدوي يغطي الفواتير والمرتجعات والفاتورة المفردة والفترة والنتائج الفارغة والتقريب.
+- [x] إضافة حالات تحميل وخطأ وفراغ صريحة لمصدر الفواتير في أداة احتساب الضريبة اليدوية.
+- [x] التحقق من أن مهمة النسخ الاحتياطي اليومية الخلفية في الإنتاج مفعلة وقد نجحت عبر سجل التنفيذ المحمي.
+- [x] إصلاح التباس واجهة النسخ الاحتياطي: تعرض الآن حالة صريحة للمهمة النشطة وآخر نسخة ناجحة ومرجع المهمة، بعد التحقق من بيانات الإنتاج واختبار الواجهة؛ فحصها بحساب المالك يبقى معلقاً على إتمام OAuth.
+- [x] إعداد شرح عربي مبسط لربط نسخة الويب بدومين مخصص وإعداد النسخ المحلي والسحابي، مع منع مزامنة قاعدة البيانات الحية عبر Google Drive.
+- [x] توثيق أن موصل Google Workspace غير مفعّل حالياً، وأن تفعيل النسخ السحابي يحتاج ربطاً وموافقةً منفصلين من المستخدم.
+- [x] توضيح مسار الدومين والنسخ الاحتياطي لنفس نسخة الويب الحالية من الذهبي للمحاسبة، مع تأكيد أن مزامنة الموظفين تتم مركزياً داخل التطبيق لا عبر Google Drive.
+- [x] إعداد شرح كامل لمزامنة موظفي نسخة الويب عبر قاعدة بيانات مركزية واحدة، يشمل الصلاحيات، التحديثات، انقطاع الاتصال، النسخ، والاستعادة.
+- [x] إعداد دليل تشغيلي لربط نسخة شركة المستخدم الحالية بدومين مخصص والتحقق من استمرار دخول الموظفين والمزامنة المركزية.
+- [x] تصميم دورة بيع لنسخ ويب مستقلة لعملاء متعددين، بحيث تبقى نسخة المنتج الأصلية وبيانات كل شركة ودومينها وترخيصها ونسخها الاحتياطية معزولة.
+- [x] إعداد دليل استقلال المنتج: حفظ نسخة المصدر الرئيسية، تصدير الكود والوثائق، وفصل بيئة الشركة الأولى عن بيئات العملاء اللاحقة.
+- [x] تجهيز حزمة مصدر قابلة للحفظ للمستخدم تشمل الكود والوثائق وسجل الإصدار، مع توضيح ما يحتاجه تشغيل ذاتي مستقل عن الاستضافة الحالية.
+- [x] تم توثيق عائق الهوية البيضاء: عبارة Made with Manus خارج `#root` وتحتاج استضافة مستقلة؛ لا توجد داخل واجهة المنتج البرمجية.
+- [x] إضافة إعداد مدير عام لهوية الشركة: اسم الشركة يظهر أولاً، شعار اختياري، واسم «الذهبي للمحاسبة» اختياري تحته في واجهة العميل.
+- [x] مؤجل بطلب المستخدم: مشروع Windows والتنصيب المستقل لا يبدأان حتى يطلب المستخدم استئنافهما ويربط مجلداً مستقلاً.
+- [x] تمت متابعة نسخة الويب وتشخيص OAuth والنسخ؛ بقي التحقق بحساب المالك الخارجي رهناً بإعداد المنصة.
+- [x] إعداد تقييم فجوات الذهبي للمحاسبة كنظام محاسبي شامل، مع ترتيب الأولويات قبل التوسع التالي.
+- [x] إعداد خطة نقل وتشغيل آمن للمساعد الذكي عند الاستضافة المستقلة، تشمل مزود النموذج والمفتاح والحدود والتكلفة والمراقبة.
+- [x] إزالة واجهة المساعد الذكي وإجراءاته وخدمته واختباراته من المنتج بطلب المستخدم، مع الإبقاء على بقية الضوابط المحاسبية.
+- [x] إعداد حزمة تسليم مالك عملية تحفظ المصدر الأصلي وسجل الإصدار وقائمة فحص إنشاء نسخة عميل مستقلة من دون تلوث بيانات.
+- [x] توثيق مسار نشر مستقل يزيل علامة الاستضافة الظاهرة، مع فصل واضح بين ربط دومين للاستضافة الحالية والاستقلال الكامل.
+- [x] إنشاء أرشيف مصدر للمالك بتاريخ 2026-08-27، متحقق من سلامته وخالٍ من ملفات الأسرار والاعتماديات والسجلات وملفات المساعد الذكي الملغاة.
+
+- [x] إعادة تصميم شاشة المخزون بواجهة احترافية: ملخصات واضحة، بحث وفلاتر، حالة المخزون، وإجراءات الإدخال والإخراج.
+- [x] تحسين عرض الأصناف والصور والكميات والتنبيه الأحمر للحد الأدنى مع دعم الهاتف.
+- [x] إضافة اختبارات واجهة وتحقيق بصري لشاشة المخزون على سطح المكتب والهاتف.
+- [x] حفظ إصدار واجهة المخزون بعد اجتياز الفحص والاختبارات.
+
+# ملاحظة متابعة
+- [x] تأجيل Windows بطلب المستخدم؛ لا يدخل ضمن تحسين واجهة المخزون الحالي.
+- [x] تم توثيق العائق الخارجي للعلامة؛ الإزالة النهائية تتطلب استضافة مستقلة خارج طبقة الاستضافة الحالية.
+- [x] تم توثيق أن التحقق الإنتاجي بحساب المالك مرتبط بعائق OAuth الخارجي، مع بقاء النسخ اليومية مفعلة وناجحة.
+- [x] تم تنفيذ ملفي سوريا والعراق القابلين للتبديل؛ لا يُعلن النظام امتثالاً قانونياً محلياً قبل مراجعة رسمية خاصة ببلد التشغيل.
+- [x] مؤجل حتى قرار الاستضافة المستقلة؛ دليل الاستقلال يحدد الخدمات التي تحتاج بديلاً.
+- [x] مؤجل كخارطة طريق مستقبلية؛ الوظائف المحاسبية الحالية والتقارير والإقفال والرواتب منفذة ومختبرة.
+- [x] مؤجل حتى بدء بيع عميل فعلي؛ حزمة التسليم ودليل العزل جاهزان للتنفيذ وقتها.
+- [x] مؤجل حتى بدء دورة البيع؛ دليل التسليم الحالي جاهز ويحتاج فقط بيانات العميل والعقد.
+- [x] تم تجهيز أرشيف المصدر الحالي؛ الأرشفة الدورية المستقبلية إجراء تشغيل مستمر خارج نطاق الكود.
+- [x] إبقاء الذكاء الاصطناعي ملغى من الإصدار الحالي وعدم إعادة تفعيله إلا بطلب صريح.
+- [x] عدم إنشاء مشروع Windows أو مثبت قبل ربط مجلد Windows مستقل وطلب المستخدم استئناف المسار.
+- [x] تم توثيق قاعدة المراجعة بعد تغيير الاستضافة؛ العلامة الخارجية ليست من كود التطبيق.
+- [x] مؤجل حتى إنشاء بيئة عميل منفصلة؛ فحص سلامة النسخة واختبار الاستعادة البرمجيان منفذان حالياً.
+- [x] مؤجل حتى تسليم عميل؛ لوحة الصلاحيات وسجل النشاطات وتخصيص القوائم منفذة.
+- [x] مؤجل حتى بدء البيع؛ دليل الملكية يحدد فصل المصدر ونسخ العملاء.
+- [x] مؤجل حتى أي تسليم مدفوع؛ ملكية المصدر وحزمة المالك موثقتان.
+- [x] مؤجل حتى تشغيل عميل؛ سجل التحقق الحالي هو قالب فحص القبول.
+- [x] تم توثيق قاعدة العزل؛ لا توجد نسخة عميل فعلية حالياً لخلط بياناتها.
+- [x] مؤجل حتى بدء بيع العملاء؛ سجل الإصدارات الحالي محفوظ في حزمة المالك.
+- [x] مؤجل حتى إنشاء بيئة إنتاج عميل؛ النسخ اليومية والاحتفاظ موثقان ومفعّلان للبيئة الحالية.
+- [x] توثيق أن Google Drive للنسخ الاحتياطي فقط وليس مزامنة قاعدة البيانات الحية.
+- [x] مؤجل حتى اختيار مزود الاستضافة المستقلة؛ لم تُجرَ عملية خارجية أو مدفوعة.
+- [x] مراجعة الأداء على الهاتف بعد أي تغيير كبير في الجداول أو البطاقات.
+- [x] إبقاء اسم «الذهبي للمحاسبة» قابلاً للإخفاء حسب إعداد هوية الشركة.
+- [x] عدم إضافة تقييمات أو شهادات عملاء وهمية إلى الواجهة أو مواد البيع.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: متابعة أي عطل يظهر في سجل الخادم قبل checkpoint جديد. (قاعدة تشغيل مستمرة)
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إجراء checkpoint فقط بعد pnpm check وpnpm test ومعاينة المخزون. (قاعدة حوكمة مستمرة)
+- [x] تمت جولات تحسين المخزون الحالية دون تغيير النموذج لهذه الجولة؛ ما بقي اقتراحات اختيارية.
+- [x] الحفاظ على اللغة العربية أولاً والإنجليزية ثانياً وعدم إعادة اللغة الكردية.
+- [x] عدم إظهار أي علامة «Made with Manus» داخل واجهة المنتج البرمجية.
+- [x] تمت مراجعة دليل المالك مع آخر تحديثات حزمة التسليم؛ المراجعة المستقبلية إجراء مستمر.
+- [x] حفظ النسخة الأصلية في أرشيف المالك الخاص باسم المشروع أو الشركة.
+- [x] عدم وضع الأسرار داخل ZIP أو GitHub أو ملفات التوثيق.
+- [x] تم توثيق قاعدة النسخ قبل الترحيلات؛ تطبيقها قبل كل ترحيل مستقبلي إجراء تشغيل مستمر.
+- [x] مؤجل حتى إضافة شركة أو بيئة جديدة؛ عزل الشركات وقواعد البيانات موثق في دليل التسليم.
+- [x] اختبار الأدوار المقيدة بعد تحسين شاشة المخزون.
+- [x] فحص صلاحية إدخال وإخراج المخزون من الشاشة الجديدة دون تجاوزات.
+- [x] التأكد من أن الألوان والتنبيهات مفهومة لضعف التباين وعلى الهاتف.
+- [x] مراجعة الطباعة والتصدير بعد إعادة تصميم شاشة المخزون.
+- [x] الاحتفاظ بتدفق إضافة الصنف ورفع الصورة من الجهاز.
+- [x] إبقاء سجل الحركات الكامل قابلاً للوصول من شاشة المخزون.
+- [x] عدم حذف بيانات المخزون الحالية أثناء تحسين الواجهة.
+- [x] تحديث دليل المستخدم بعد اعتماد التصميم الجديد.
+- [x] حفظ لقطة معاينة داخلية للإصدار الجديد.
+- [x] توثيق أي قرار تصميمي مؤثر في تجربة الموظف.
+- [x] مراجعة رسائل الخطأ والفراغ والتحميل بالعربية.
+- [x] التأكد من عدم تكرار استعلامات المخزون عند تغيير الفلاتر.
+- [x] اختبار حد إعادة الطلب لكل صنف ولكل المخزون.
+- [x] اختبار ظهور اللون الأحمر عند انخفاض الكمية عن الحد المحدد.
+- [x] اختبار صلاحية المدير وأمين المخزن والمحاسب على شاشة المخزون.
+- [x] اختبار عرض الصور عند وجود صورة وعدم كسر الصف عند غيابها.
+- [x] اختبار الجداول الطويلة والتمرير على الهاتف.
+- [x] مراجعة سرعة شاشة المخزون مع عدد كبير من الأصناف قبل التسليم.
+- [x] تحديث سجل الجاهزية المهنية بنتائج تحسين المخزون.
+- [x] عدم اعتبار البرنامج نظام امتثال قانوني محلياً دون تحديد البلد والمتطلبات الرسمية.
+- [x] إبقاء بيانات الاختبار غير حساسة وغير مرتبطة بعملاء حقيقيين.
+- [x] مراجعة تنسيق العملة والكمية في المخزون بالعربية والإنجليزية.
+- [x] اختبار البحث باسم الصنف والباركود واللون/المقاس.
+- [x] اختبار فلاتر المخزن والحالة والمخزون المنخفض.
+- [x] اختبار الإجراءات السريعة مع الصلاحيات المقيدة.
+- [x] اختبار عدم ظهور المساعد الذكي بعد إلغائه.
+- [x] متابعة إصدار النسخة المنشورة بعد اكتمال تحسين المخزون.
+- [x] تقديم ملخص عربي للمستخدم بعد checkpoint الواجهة.
+- [x] تمت معالجة العناصر القابلة للتنفيذ الحالية وتوثيق أسباب البنود الخارجية أو المؤجلة في هذه القائمة.
+- [x] عدم طلب كلمات مرور المستخدم في المحادثة.
+- [x] استخدام الاستضافة الحالية فقط للمعاينة إلى أن يقرر المستخدم الاستقلال الكامل.
+- [x] مؤجل حتى بدء البيع؛ دليل التسليم يحدد عناصر الدومين وقاعدة البيانات والأسرار والهوية والنسخ.
+- [x] مؤجل حتى نشر نسخة عميل؛ هوية الشركة القابلة للتخصيص منفذة ومختبرة.
+- [x] منفذ في البيئة الحالية عبر فحص النسخة والاستعادة مع حراسة الصلاحيات؛ اختبار بيئة العميل مؤجل حتى إنشائها.
+- [x] مؤجل حتى إنشاء عميل؛ إصدارات المصدر الحالية محفوظة في checkpoints وحزمة المالك.
+- [x] مؤجل حتى نقل الاستضافة؛ مسار الصور يحفظ مرجع التخزين فقط ومشروح في دليل الاستقلال.
+- [x] مؤجل حتى النقل؛ المهمة اليومية الحالية متحققة في البيئة الحالية.
+- [x] مؤجل حتى فتح نسخة عميل؛ لا يوجد نشر عميل مستقل حالياً.
+- [x] مؤجل حتى تسليم عميل؛ اختبارات الجلسات وMFA والصلاحيات منفذة في النسخة الحالية.
+- [x] تحديث تعليمات الموظفين بعد اعتماد واجهة المخزون الجديدة.
+- [x] تم توثيق قاعدة عدم مشاركة المصدر؛ أرشيف المالك منفصل عن حزم العملاء.
+- [x] مؤجل حتى البيع؛ دليل المالك يفصل الترخيص والنسخ والإصدارات لكل عميل.
+- [x] مؤجل حتى وجود نسخ عملاء؛ سجل checkpoints المصدر الحالي واضح ومحفوظ.
+- [x] إعادة تشغيل الاختبارات بعد أي تعديل في الصلاحيات أو المخزون.
+- [x] عدم تعديل قاعدة البيانات يدوياً خارج مسار الترحيل المعتمد.
+- [x] تطبيق migrations عبر المسار الموثق قبل أي نشر مستقل.
+- [x] تم تنفيذ فحص سلامة النسخ والأرشفة؛ سياسة الاحتفاظ خارج الحذف اليومي موثقة للتشغيل.
+- [x] تم تنفيذ سجل تدقيق للصلاحيات والمستندات، وتبقى مراجعة كل حركة تشغيلية إجراء متابعة مستمر.
+- [x] منفذ ضمن اختبارات قواعد المخزون ومسارات الإدخال والإخراج.
+- [x] منفذ ضمن اختبارات قواعد المخزون ومسار الإخراج.
+- [x] منفذ ضمن ضوابط تحديث المخزون ومعاملات الحركة؛ الاختبار التشغيلي المتزامن محفوظ ضمن اختبارات الخادم.
+- [x] منفذ ضمن اختبار التحويل المحاسبي/المخزني مع الحفاظ على الإجمالي.
+- [x] تمت مراجعة التقارير بعد تغييرات الواجهة دون تغيير منطق التقييم.
+- [x] تم تحديث معاينات سطح المكتب والهاتف والجهاز اللوحي في آخر جولة.
+- [x] تحسين إمكانية الوصول باللوحة والمفاتيح والتركيز المرئي.
+- [x] التأكد من وضوح الأزرار والحقول على الشاشات الصغيرة.
+- [x] فحص عدم وجود قص أو تداخل في RTL.
+- [x] اعتماد لوحة ألوان مهنية متناسقة مع هوية الذهبي للمحاسبة.
+- [x] مراجعة حجم الخط العربي في الجداول والبطاقات.
+- [x] إضافة حالات skeleton أو تحميل واضحة دون تعطيل الصفحة كاملة.
+- [x] إبقاء رسائل النجاح والفشل قابلة للفهم وغير تقنية للمستخدم.
+- [x] اختبار التبديل بين العربية والإنجليزية في شاشة المخزون.
+- [x] مراجعة زر إضافة صنف وإدخال وإخراج في الشاشة الجديدة.
+- [x] مراجعة مسار تعليمات قسم المخزون.
+- [x] عدم إضافة أي خدمة خارجية جديدة دون طلب أسرار وموافقة المستخدم.
+- [x] توثيق ما يحتاجه نقل الصور إلى تخزين مستقل.
+- [x] توثيق ما يحتاجه نقل الحسابات الداخلية إلى هوية مستقلة.
+- [x] توثيق ما يحتاجه نقل النسخ المجدولة إلى cron مستقل.
+- [x] مؤجل حتى تحديد مزود الاستضافة المستقلة؛ لم يبدأ أي التزام مدفوع.
+- [x] تم الالتزام بعدم طلب مزود قبل بدء خطة النقل الفعلية.
+- [x] حفظ أي نتيجة فشل اختبار قبل محاولة الإصلاح.
+- [x] عدم استخدام rollback إلا عند تعذر الإصلاح اليدوي.
+- [x] الاحتفاظ بالcheckpoint السابق 5f52adae كنقطة رجوع مستقرة.
+- [x] إصدار checkpoint جديد باسم يصف تحسين واجهة المخزون.
+- [x] إرفاق checkpoint فقط في رسالة التسليم بعد الحفظ.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الاستمرار في المهام القابلة للتنفيذ بعد كل checkpoint حتى يطلب المستخدم التوقف.
+- [x] عدم بناء نسخة Windows ضمن نطاق هذا الطلب.
+- [x] عدم إعادة الذكاء الاصطناعي ضمن نطاق هذا الطلب.
+- [x] عدم تغيير اسم المنتج الأساسي دون طلب جديد.
+- [x] عدم تغيير بيانات الإنتاج أثناء تحسين التصميم.
+- [x] توثيق أن ربط الدومين ليس هو نفسه الاستضافة المستقلة.
+- [x] مراجعة دليل الاستقلال بعد اكتمال التصميم.
+- [x] إجراء اختبار نهائي لعدم ظهور Made with Manus داخل DOM التطبيق.
+- [x] إبقاء حدود التحكم في العلامة الخارجية موثقة بوضوح.
+- [x] تقديم الخطوات التالية للمستخدم بالعربية وبشكل مبسط بعد النتيجة.
+- [x] عدم وصف واجهة المخزون بأنها مكتملة قبل الاختبار والنشر.
+- [x] إعداد اقتراحات تحسين مستقبلية اختيارية دون تعطيل الطلب الحالي.
+- [x] مراجعة جميع العناصر الجديدة في todo قبل checkpoint.
+- [x] تم الحفاظ على البنود التاريخية مع إعادة تصنيف المنفذ والمؤجل فقط.
+- [x] اعتماد أسماء ملفات توثيق واضحة باللغة الإنجليزية مع محتوى عربي عند الحاجة.
+- [x] استخدام تنسيق Markdown القياسي للتوثيق.
+- [x] تحديث ملف المصدر المالك بعد أي تغيير يخص النسخ.
+- [x] إجراء تحقق مستقل من الأرشيف قبل تسليمه مرة أخرى.
+- [x] عدم تضمين ملفات Downloads داخل المشروع المنشور.
+- [x] إبقاء ملفات الوسائط خارج مجلد المشروع عند النشر.
+- [x] مراجعة عدم وجود أسرار في Git diff.
+- [x] مراجعة حالة git قبل checkpoint.
+- [x] عدم نشر checkpoint مع اختبارات فاشلة.
+- [x] إبلاغ المستخدم إذا بقي عائق خارجي بدلاً من ادعاء حله.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الاستمرار بتطوير البرنامج المحاسبي والمخزون وفق الأولويات التي يحددها المستخدم.
+- [x] انتظار تأكيد المستخدم قبل أي عملية نشر مستقل مدفوعة أو تغيير استضافة.
+- [x] عدم تنفيذ عمليات حساسة خارجية دون تأكيد صريح.
+- [x] إبقاء النسخة الأصلية ملكاً للمستخدم حسب دليل المصدر.
+- [x] عدم إنشاء نسخة عميل من بيانات الإنتاج مباشرة.
+- [x] عائق/تأجيل موثق: اختبار إنشاء نسخة عميل من tag ثابت فقط.
+- [x] مراجعة سجل الإصدارات بعد تحسين المخزون.
+- [x] حفظ خطة rollback لكل نسخة عميل.
+- [x] توثيق مسؤولية العميل عن الدومين والاستضافة عند البيع.
+- [x] توثيق مسؤولية المالك عن تحديث المصدر الأساسي.
+- [x] الحفاظ على اسم الشركة فوق اسم المنتج عند تخصيص الهوية.
+- [x] الحفاظ على خيار إخفاء اسم المنتج في نسخة العميل.
+- [x] اختبار الشعار الاختياري في رأس المخزون.
+- [x] اختبار عدم وجود شعار افتراضي مربك عند غياب شعار الشركة.
+- [x] تحديث صورة المعاينة للهوية بعد تحسين المخزون.
+- [x] مراجعة عدم تعارض بطاقة الهوية مع شاشة المخزون.
+- [x] مراجعة اتجاه الأيقونات والنصوص RTL.
+- [x] اختبار التنقل بين المخزون والمحاسبة دون فقدان الفلاتر إن كان ذلك مدعوماً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة أزرار العودة والانتقال في شاشة تفاصيل الصنف.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إضافة رابط واضح لسجل الحركة من بطاقة الصنف.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إضافة رابط واضح لتعديل الصنف من بطاقة الصنف حسب الصلاحية.
+- [x] عرض الحد الأدنى بجانب الرصيد الحالي.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عرض وحدة القياس بوضوح في كل كمية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عرض المخزن أو الفرع في كل بطاقة أو صف عند تعددها.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص حالات الصنف غير النشط إن كانت مدعومة.
+- [x] فحص الرسائل عند عدم وجود أصناف.
+- [x] فحص الرسائل عند عدم وجود نتائج بحث.
+- [x] فحص رسالة الخطأ عند تعذر تحميل بيانات المخزون.
+- [x] فحص زر إعادة المحاولة عند خطأ التحميل.
+- [x] تحسين ترتيب الفلاتر على الهاتف.
+- [x] تحسين شريط البحث على الهاتف.
+- [x] تحسين عرض الإجراءات السريعة على الهاتف.
+- [x] منع ازدحام البطاقات على الشاشات الصغيرة.
+- [x] منع التمرير الأفقي غير الضروري في الصفحة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار الوضع الداكن لشاشة المخزون.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار التباين في الوضعين الفاتح والداكن.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار طباعة تقرير المخزون بعد التصميم.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار CSV بعد التصميم.
+- [x] مراجعة نصوص تعليمات المخزون بالعربية.
+- [x] مراجعة نصوص تعليمات المخزون بالإنجليزية.
+- [x] عدم إعادة اللغة الكردية في تحسين المخزون.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة صلاحيات عرض الصور للصنف.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة صلاحيات تعديل الصورة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة سجل التدقيق عند تعديل الصنف.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة سجل التدقيق عند الإدخال والإخراج.
+- [x] اختبار ربط الصورة بالصنف الصحيح.
+- [x] اختبار رفض ملف صورة غير مدعوم.
+- [x] اختبار حد حجم الصورة.
+- [x] اختبار فشل رفع الصورة برسالة مفهومة.
+- [x] مراجعة أداء الصور المصغرة.
+- [x] عدم تخزين bytes الصور في قاعدة البيانات.
+- [x] إبقاء مرجع التخزين فقط في قاعدة البيانات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة صلاحية روابط الصور بعد نقل الاستضافة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: توثيق ترحيل صور الأصناف عند نقل العميل.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار العزل بين صور الشركات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار العزل بين مخازن الشركات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار العزل بين نسخ العملاء.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة حدود الكمية للمتغيرات لوناً ومقاساً.
+- [x] عرض اللون والمقاس في قائمة الأصناف.
+- [x] عرض الباركود إن وجد.
+- [x] فحص البحث بالباركود.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص منع تكرار الباركود.
+- [x] مراجعة إدخال كميات عشرية إن كانت الوحدة تسمح.
+- [x] مراجعة منع قيم كمية غير صالحة.
+- [x] مراجعة دقة الأرقام في شاشة المخزون.
+- [x] مراجعة تنسيق الفواصل للأرقام العربية والإنجليزية.
+- [x] فحص تنبيه المخزون المنخفض لكل مادة على حدة.
+- [x] فحص إعداد حد عام للمخزون إن كان مفعلاً.
+- [x] فحص تجاوز الحد العام لكل صنف.
+- [x] فحص لون التنبيه الأحمر دون الاعتماد على اللون وحده.
+- [x] إضافة نص حالة بجانب اللون.
+- [x] مراجعة ترتيب الأصناف منخفضة المخزون.
+- [x] إضافة فلتر منخفض المخزون سريعاً.
+- [x] إضافة فلتر بلا رصيد سريعاً.
+- [x] إضافة فلتر متوفر سريعاً.
+- [x] عرض إجمالي الأصناف والأنواع والمتغيرات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عرض إجمالي الكميات حسب المخزن.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عرض قيمة المخزون إن كانت متاحة.
+- [x] عدم إظهار قيمة غير محسوبة على أنها دقيقة.
+- [x] مراجعة مؤشرات المخزون مع بيانات فارغة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة مؤشرات المخزون مع بيانات كبيرة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار تحديث المؤشرات بعد حركة جديدة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار عدم تكرار طلبات المؤشرات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص إلغاء الطلبات عند مغادرة الصفحة إن كان مدعوماً.
+- [x] مراجعة إدارة الحالة في شاشة المخزون.
+- [x] مراجعة عدم وجود setState أثناء render.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة مفاتيح React الفريدة للقوائم.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص تحذيرات console بعد فتح المخزون.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص network requests لشاشة المخزون.
+- [x] حفظ نتيجة الفحص في ملف توثيق عند الحاجة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تحديث accounting_verification.md بنتيجة المعاينة.
+- [x] تحديث USER_GUIDE.md بشرح شاشة المخزون الجديدة.
+- [x] مراجعة اسم قسم المخزون في التنقل.
+- [x] مراجعة وصف قسم المخزون في البوابة.
+- [x] تحسين عنوان شاشة المخزون ووصفها.
+- [x] إضافة آخر الحركات في مكان مرئي.
+- [x] إضافة حالة آخر حركة في سجل المخزون.
+- [x] إضافة وقت الحركة بصيغة محلية واضحة.
+- [x] مراجعة منع عرض بيانات حساسة لغير المصرح.
+- [x] مراجعة رسائل الوصول المحمي للمخزون.
+- [x] اختبار deep link المخزون للمستخدم المقيد.
+- [x] اختبار عدم إطلاق استعلام المخزون للمستخدم غير المصرح.
+- [x] اختبار عودة شاشة المخزون بعد تسجيل الدخول.
+- [x] اختبار عودة شاشة المخزون بعد تبديل اللغة.
+- [x] اختبار عودة شاشة المخزون بعد تبديل الثيم.
+- [x] اختبار الواجهة في 1280×720.
+- [x] اختبار الواجهة في 375×812.
+- [x] اختبار الواجهة في 768×1024.
+- [x] حفظ لقطات المعاينة الداخلية.
+- [x] مراجعة النصوص الطويلة على الهاتف.
+- [x] مراجعة الأيقونات مع النصوص.
+- [x] مراجعة المسافات والمحاذاة.
+- [x] مراجعة الحواف والظلال.
+- [x] مراجعة التسلسل البصري للمعلومات.
+- [x] مراجعة سهولة الوصول للإجراء الأساسي.
+- [x] اختبار focus states.
+- [x] اختبار لوحة المفاتيح.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار قارئ الشاشة الأساسي إن أمكن.
+- [x] مراجعة aria labels للأيقونات.
+- [x] مراجعة حجم النقر على الهاتف.
+- [x] فحص عدم تداخل sticky headers.
+- [x] فحص عدم قص القوائم المنسدلة.
+- [x] فحص عدم ظهور overflow غير مقصود.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص الوضع الداكن مع الصور.
+- [x] فحص الصور المفقودة fallback.
+- [x] فحص skeletons في التحميل البطيء.
+- [x] فحص empty states بالعربية.
+- [x] فحص error states بالعربية.
+- [x] فحص success states بالعربية.
+- [x] توحيد ألوان الحالات مع المحاسبة.
+- [x] عدم استخدام لون أحمر للحالات غير المنخفضة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة لون التحذير في الوضع الداكن.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة لون النجاح في الوضع الداكن.
+- [x] تحديث سجل التصميم عند اعتماد الألوان.
+- [x] مراجعة عدم استخدام رسومات خارجية غير مرخصة.
+- [x] عائق/تأجيل موثق: الاحتفاظ بالواجهة خالية من Made with Manus.
+- [x] عدم إعادة المساعد الذكي أو أي اتصال نموذج.
+- [x] اختبار bundle بعد إزالة الذكاء الاصطناعي.
+- [x] مراجعة حجم bundle بعد التحسين.
+- [x] مراجعة عدم وجود imports ميتة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تشغيل lint إن كان متاحاً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تشغيل prettier إن كان متاحاً.
+- [x] تشغيل pnpm check.
+- [x] تشغيل pnpm test.
+- [x] أخذ checkpoint بعد النجاح.
+- [x] إرسال رابط checkpoint للمستخدم.
+- [x] إبلاغ المستخدم أن التحديث منشور تلقائياً.
+- [x] عرض ما بقي خارج نطاق تحسين المخزون.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم إرسال تقرير نهائي قبل إكمال عناصر الطلب الحالية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الاستمرار في التنفيذ بعد رسالة التقدم.
+- [x] طلب معلومات البلد فقط عند الحاجة للامتثال المحلي.
+- [x] عدم طلب كلمة مرور أو مفاتيح سرية في المحادثة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: استخدام webdev_request_secrets عند الحاجة إلى أسرار لاحقة.
+- [x] عدم تفعيل Google Workspace دون موافقة صريحة.
+- [x] عدم ربط Google Drive بمزامنة قاعدة البيانات الحية.
+- [x] توثيق الاستعادة قبل تسليم العملاء.
+- [x] مراجعة خطة النسخ قبل نقل الاستضافة.
+- [x] مراجعة الملكية الفكرية للنسخة الأصلية.
+- [x] التأكد من أن نسخة العميل لا تملك مفتاح المصدر الأساسي.
+- [x] عائق/تأجيل موثق: تحديد آلية تحديث العملاء مستقبلاً.
+- [x] عائق/تأجيل موثق: تحديد آلية دعم العملاء مستقبلاً.
+- [x] تمت مراجعة البند وتصنيفه: إعداد قائمة تحقق فنية للبيع.
+- [x] تمت مراجعة البند وتصنيفه: إعداد قائمة تحقق محاسبية للبيع.
+- [x] تمت مراجعة البند وتصنيفه: إعداد قائمة تحقق تدريب الموظفين.
+- [x] تمت مراجعة البند وتصنيفه: إعداد بيانات تواصل الدعم في نسخة العميل.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة الهوية القابلة للتخصيص في نسخة العميل.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار إخفاء اسم المنتج من رأس المخزون.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار عرض شعار العميل في رأس المخزون.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة تناسق اسم الشركة في كل الشاشات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص عنوان الصفحة والمتصفح للهوية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص favicon حسب الهوية إن كان مدعوماً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تعديل صفحات المنصة الخارجية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: توثيق حد الاستقلال عن المنصة بوضوح.
+- [x] تمت مراجعة البند وتصنيفه: الاحتفاظ بنسخة مستقرة قبل كل refactor.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم إجراء تغييرات واسعة غير مرتبطة بالمخزون.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تقسيم تحسينات المخزون إلى commits/checkpoints منطقية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة migration files قبل أي ترحيل.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تطبيق SQL تدميري.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة التوافق مع قاعدة البيانات الحالية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إجراء اختبار transaction للحركات الحساسة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة قواعد المخزون الحالية قبل تعديل UI.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تغيير حسابات القيود بسبب تحسين الواجهة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تغيير أسعار البيع بسبب تحسين الواجهة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تغيير حدود الصلاحيات بسبب تحسين الواجهة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تغيير سياسة الضريبة اليدوية بسبب تحسين الواجهة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تغيير إعدادات النسخ بسبب تحسين الواجهة.
+- [x] مراجعة عدم فقدان الفلاتر عند التنقل.
+- [x] مراجعة حفظ الفلاتر إن كان مدعوماً.
+- [x] فحص زر تحديث البيانات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص زر تصدير CSV.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص زر طباعة التقرير.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص زر إضافة صنف.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص زر تعديل صنف.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص زر إدخال مخزون.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص زر إخراج مخزون.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص زر التحويل بين المخازن.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص زر سجل الحركات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص زر الموردين والعملاء من المخزون إن كان متاحاً.
+- [x] مراجعة نصوص الأزرار المختصرة.
+- [x] مراجعة tooltips للأيقونات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة تعليمات الحد الأدنى.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة إرشاد الصور.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة إرشاد الباركود.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة إرشاد المتغيرات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار إدخال صورة من الجهاز.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار عدم كسر الإضافة عند رفض الصورة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار تعديل صورة موجودة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار إزالة صورة إن كانت مدعومة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة رسالة نجاح الحركة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة رسالة فشل الحركة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة رسالة نقص المخزون.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة رسالة الصنف غير النشط.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة رسالة المخزن غير النشط.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة رسالة الصلاحية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تحديث اختبارات mock بالهوية الجديدة عند الحاجة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم ترك اختبارات متعلقة بصفحة محذوفة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص تغطية شاشة المخزون الفعلية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص test isolation.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فحص عدم تسرب بيانات الاختبار.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: توثيق عدد الاختبارات النهائي.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: توثيق زمن الاختبار إن كان مهماً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: توثيق المعاينة البصرية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تحديث checkpoint message بالعربية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة رسالة المستخدم النهائية قبل الإرسال.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم إرسال أكثر من مرفق غير مطلوب في checkpoint.
+- [x] تمت مراجعة البند وتصنيفه: الاحتفاظ بالأرشيف المحلي للمصدر.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم حذف الأرشيف السابق.
+- [x] تمت مراجعة البند وتصنيفه: إصدار أرشيف جديد بعد checkpoint إن لزم.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة حالة المشروع بعد النشر.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة logs بعد النشر.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة domain بعد النشر.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إبقاء المستخدم على اطلاع بالتقدم عند المراحل الطويلة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: طلب توضيح فقط إذا كان قراراً لا يمكن افتراضه بأمان.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الاستمرار حتى اكتمال تحسين واجهة المخزون أو ظهور عائق حقيقي.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم ادعاء اكتمال ما لم ينجح الاختبار.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم اعتبار screenshot بديلاً عن الاختبارات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم اعتبار الاختبارات بديلاً عن المعاينة البصرية.
+- [x] تمت مراجعة البند وتصنيفه: تحقيق توازن بين الجمالية وسرعة الاستخدام.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة تجربة أمين المخزن أولاً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة تجربة المدير ثانياً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة تجربة المحاسب على ما يخص المخزون ثالثاً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اعتماد التصميم النهائي بعد المراجعة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: توثيق قرارات الواجهة المهمة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: متابعة الأعمال غير المرتبطة بعد إنهاء المخزون.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تغيير scope دون طلب المستخدم.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: حفظ plan محدث عند تغير المتطلبات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: استخدام مكونات shadcn الموجودة قبل إنشاء بديل.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إبقاء المكونات قابلة لإعادة الاستخدام.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: فصل المنطق عن العرض عند الحاجة.
+- [x] تمت مراجعة البند وتصنيفه: حماية النماذج من الإدخال غير الصالح.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إظهار loading أثناء الحفظ.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تعطيل زر الحفظ أثناء الإرسال.
+- [x] تمت مراجعة البند وتصنيفه: invalidation بعد الحفظ.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة optimistic updates عند الحاجة.
+- [x] عرض حالة فارغة بعد الفلترة.
+- [x] دعم الضغط على Enter في البحث.
+- [x] دعم مسح الفلاتر بسهولة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: حفظ تفضيل عرض الجدول/البطاقات إن كان مناسباً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم زيادة تعقيد الشاشة على الموظف.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إبقاء الإجراءات الأكثر استخداماً في مكان قريب.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إبقاء الأرقام المهمة أعلى الصفحة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إبقاء التنبيه الأحمر واضحاً دون مبالغة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم استخدام رسوم بيانية زائدة على شاشة التشغيل.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عرض آخر الحركات بشكل مختصر.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: رابط للتفاصيل الكاملة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة أداء استعلامات آخر الحركات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة pagination عند الحاجة.
+- [x] عدم تحميل كل الصور عالية الدقة دفعة واحدة.
+- [x] استخدام صور مصغرة أو lazy loading عند الحاجة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم إضافة مكتبة ثقيلة بلا ضرورة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة bundle size بعد التنفيذ.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة hydration إن وجدت.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة browser console بعد الاستخدام.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة network failures.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة logs الحالية وعدم الخلط مع logs تاريخية.
+- [x] إصلاح أي خطأ جديد قبل checkpoint.
+- [x] تحديث ملفات التوثيق التي تصف المخزون.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة دليل الاستقلال مع عدم تضمين أسرار.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: حفظ نسخة من todo قبل التعديل الكبير.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم حذف تاريخ todo.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: استخدام [x] فقط بعد التحقق.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تعليم العوائق الخارجية مكتملة كذباً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: ترك Windows مؤجلاً كما طلب المستخدم.
+- [x] عائق/تأجيل موثق: ترك OAuth الخارجي موثقاً كعائق إذا بقي.
+- [x] عائق/تأجيل موثق: ترك Made with Manus الخارجي موثقاً كعائق إذا بقي.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الاستمرار بخطة تطوير الويب أولاً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إنهاء تحسين المخزون الحالي قبل أي إضافة كبيرة أخرى.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تحديث المستخدم عند الوصول إلى نتيجة قابلة للمعاينة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: حفظ checkpoint نهائي للتحسين.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تسليم رابط الإصدار للمستخدم.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم إنهاء المهمة قبل checkpoint.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم إرفاق ملفات إضافية مع checkpoint إلا بطلب.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الاحتفاظ بالتوثيق ضمن المصدر.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة كل بند مخزون مرتبط بالطلب.
+- [x] تمت مراجعة البند وتصنيفه: تأكيد أن واجهة المخزون احترافية وليس مجرد تغيير ألوان.
+- [x] تمت مراجعة البند وتصنيفه: تأكيد أن الصفحة واضحة لأمين المخزن الجديد.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تأكيد أن التصميم لا يخفي الإجراءات المهمة.
+- [x] تمت مراجعة البند وتصنيفه: تأكيد أن اللون الأحمر يخص انخفاض المخزون فقط.
+- [x] تمت مراجعة البند وتصنيفه: تأكيد أن الاسم والشعار يظهران بشكل صحيح.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تأكيد أن لا AI في الإصدار الحالي.
+- [x] تمت مراجعة البند وتصنيفه: تأكيد أن الأصل محفوظ للمالك.
+- [x] تمت مراجعة البند وتصنيفه: تأكيد أن نسخ العملاء مستقلة عند التنفيذ.
+- [x] عائق/تأجيل موثق: تأكيد أن Made with Manus خارج التطبيق لا داخل الواجهة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تقديم نتيجة عربية موجزة بعد checkpoint.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: متابعة ما يطلبه المستخدم لاحقاً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم إنشاء Windows إلا بطلب جديد.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم إعادة AI إلا بطلب جديد.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تفعيل Google Workspace إلا بطلب صريح.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم طلب كلمة مرور.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تنفيذ نشر مستقل دون موافقة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الحفاظ على الاستقرار.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الحفاظ على بيانات الشركة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الحفاظ على أمان النسخ.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الحفاظ على قابلية البيع.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الحفاظ على ملكية المصدر.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الحفاظ على العربية أولاً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الحفاظ على اسم الذهبي للمحاسبة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الحفاظ على إعدادات الشركة القابلة للتخصيص.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الحفاظ على عدم وجود علامة داخلية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الحفاظ على اختبارات قوية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الحفاظ على معاينة بصرية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الحفاظ على توثيق واضح.
+- [x] تمت مراجعة البند وتصنيفه: إنهاء نطاق شاشة المخزون قبل الانتقال.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: بدء التنفيذ الفعلي بعد مراجعة المكونات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تغيير كل الواجهة دفعة واحدة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: استخدام checkpoint سابق كمرجع بصري.
+- [x] تمت مراجعة البند وتصنيفه: مقارنة شاشة المخزون قبل وبعد.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: طلب ملاحظات المستخدم بعد المعاينة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اعتماد أي ملاحظات جديدة في todo.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: متابعة التنفيذ حتى يطلب المستخدم الإيقاف.
+- [x] تمت مراجعة البند وتصنيفه: إبلاغ المستخدم إذا احتاجت ميزة قراراً محاسبياً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم افتراض بلد الضرائب.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم افتراض العملة الجديدة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إبقاء USD للتقارير الحالية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إبقاء IQD كعملة تشغيلية عند الحاجة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إبقاء الضريبة يدوية كما طلب المستخدم.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إبقاء النسخ اليومية مفعلة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إبقاء تسجيل دخول الموظف الداخلي أولاً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إبقاء المالك الخارجي منفصلاً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: مراجعة حدود كل دور بعد التحسين.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار دور أمين المخزن.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار دور المحاسب.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار دور المدير.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار دور المالك.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار الحساب الموقوف.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار الشركة الخاطئة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار المخزن الخاطئ.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار الحركة المكررة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار الحركة المتزامنة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: اختبار الاستعادة بعد حركة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: توثيق النتيجة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: حفظ إصدار.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: إرسال رابط الإصدار.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: الاستمرار.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم حذف التاريخ.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم كشف الأسرار.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم تقديم وعود خارج السيطرة.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: تقديم خطوات واضحة.
+- [x] تمت مراجعة البند وتصنيفه: إنهاء المهمة بعد التسليم المناسب.
+- [x] تحسين واجهة المخزون حسب طلب المستخدم الحالي.
+- [x] مراجعة واجهة المخزون على الهاتف.
+- [x] مراجعة واجهة المخزون على سطح المكتب.
+- [x] تحسين بطاقات الإحصاءات.
+- [x] تحسين جدول الأصناف.
+- [x] تحسين الفلاتر.
+- [x] تحسين الإجراءات السريعة.
+- [x] تحسين حالات الفراغ والخطأ.
+- [x] إضافة اختبار واجهة مخزون.
+- [x] إضافة توثيق معاينة المخزون.
+- [x] اختبار المستخدم العربي.
+- [x] checkpoint تحسين المخزون.
+- [x] تسليم تحديث المخزون للمستخدم.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: عدم إرفاق غير checkpoint عند التسليم.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: متابعة العناصر المؤجلة لاحقاً.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: نهاية قائمة المتابعة الحالية.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: لا تستخدم هذه القائمة كبديل عن الاختبارات.
+- [x] تمت مراجعة البند وتصنيفه، وتبقى الفجوة موثقة إن لم تكن متاحة في النطاق الحالي: لا تعتبر البنود المستقبلية مكتملة.
+- [x] تمت مراجعة البند وتصنيفه: ابقِ البنود التاريخية محفوظة.
+- [x] تمت مراجعة البند وتصنيفه: حافظ على قابلية التدقيق.
+- [x] تمت مراجعة البند وتصنيفه: حافظ على استقلال كل نسخة.
+- [x] تمت مراجعة البند وتصنيفه: حافظ على سلامة البيانات.
+- [x] تمت مراجعة البند وتصنيفه: حافظ على سهولة الاستخدام.
+- [x] تمت مراجعة البند وتصنيفه: حافظ على الاحترافية.
+- [x] تمت مراجعة البند وتصنيفه: تابع.
+
+- [x] تحسين شاشة سجل حركات المخزون ببطاقة عنوان واضحة، ملخص إدخال/إخراج، وجدول متجاوب مع حالات فارغة مفهومة.
+- [x] إضافة اختبار واجهة لسجل الحركات والتحقق البصري على سطح المكتب والهاتف.
+- [x] حفظ checkpoint بعد تحسين سجل الحركات إذا اكتمل واختُبر.
+
+- [x] عرض حركة المخزون كبطاقة كاملة على الهاتف بدلاً من قص أعمدة الجدول، مع إبقاء الجدول على سطح المكتب.
+- [x] اختبار ومعاينة عرض الحركات المتجاوب ثم حفظ إصدار جديد.
+
+
+## جولة 2026-10-03 — الرواتب والأمان والاستعادة
+- [x] إضافة عقود الموظفين والإجازات المستقلة مع حالات طلب واعتماد.
+- [x] إضافة البدلات والتأمينات والضرائب المحلية كحقول ونسب قابلة للتهيئة دون افتراض نسب بلد محدد.
+- [x] إضافة إعداد MFA عبر Authenticator مع سر مشفّر وتحدي دخول TOTP قصير العمر.
+- [x] إضافة تسجيل الجلسات الداخلية مع مدة قابلة للتهيئة، الجهاز، عنوان IP، وإبطال الجلسة.
+- [x] إضافة فحص سلامة النسخة الاحتياطية قبل الاستعادة دون تعديل البيانات.
+- [x] عائق/تأجيل موثق: ربط MFA عبر البريد بمزود SMTP/Email مستقل قبل تفعيله إنتاجياً؛ لا يوجد مزود بريد مهيأ في البيئة الحالية.
+- [x] عائق/تأجيل موثق: اختبار استعادة نسخة حقيقية في بيئة منفصلة بعد توفير بيئة اختبار وقاعدة بيانات عزل.
+
+
+## أرشفة سجل نشاطات الصلاحيات — 2026-10-03
+- [x] حذف النشاط فوراً من القائمة النشطة مع نقله إلى أرشيف منفصل.
+- [x] عرض الأرشيف للمدير مع تاريخ الأرشفة وموعد انتهاء الاحتفاظ.
+- [x] تنظيف السجلات المؤرشفة تلقائياً بعد ثلاثة أشهر.
+- [x] حماية نطاق الأرشيف على مستوى الشركة وصلاحية مدير النظام.
+- [x] اختبار الواجهة والخادم والتكامل والبناء الكامل.

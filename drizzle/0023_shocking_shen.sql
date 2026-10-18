@@ -1,0 +1,1 @@
+ALTER TABLE `accounting_price_list_items` ADD CONSTRAINT `uq_price_list_variant` UNIQUE(`priceListId`,`variantId`);

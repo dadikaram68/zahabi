@@ -1,0 +1,1 @@
+ALTER TABLE `accounting_document_sequences` ADD CONSTRAINT `uq_docseq_branch_type` UNIQUE(`branchId`,`documentType`);

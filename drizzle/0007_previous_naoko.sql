@@ -1,0 +1,1 @@
+ALTER TABLE `accounting_companies` MODIFY COLUMN `baseCurrencyCode` varchar(3) NOT NULL DEFAULT 'USD';

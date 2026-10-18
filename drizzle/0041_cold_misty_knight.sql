@@ -1,0 +1,1 @@
+ALTER TABLE `accounting_daily_entries` MODIFY COLUMN `status` enum('draft','pendingApproval','posted','cancelled') NOT NULL DEFAULT 'draft';

@@ -1,0 +1,1 @@
+-- No-op: the multi-currency payment-account column is applied by 0043.

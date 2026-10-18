@@ -1,0 +1,1 @@
+ALTER TABLE `accounting_daily_entries` ADD `category` varchar(120);

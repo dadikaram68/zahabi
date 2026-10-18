@@ -1,0 +1,1 @@
+ALTER TABLE `accounting_accounts` ADD CONSTRAINT `uq_accounts_company_code` UNIQUE(`companyId`,`code`);

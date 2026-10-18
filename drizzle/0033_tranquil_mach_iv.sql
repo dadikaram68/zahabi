@@ -1,0 +1,1 @@
+ALTER TABLE `accounting_documents` ADD `marketExchangeRate` decimal(20,8);

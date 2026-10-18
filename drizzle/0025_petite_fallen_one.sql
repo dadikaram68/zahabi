@@ -1,0 +1,1 @@
+ALTER TABLE `accounting_documents` ADD `chequeNumber` varchar(80);
