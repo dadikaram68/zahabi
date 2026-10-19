@@ -1,0 +1,166 @@
+# =============================================================================
+# ZAHABI ACCOUNTING — PRODUCTION-ORIENTED COMPOSE FILE
+#
+# Development (hot reload, merges docker-compose.override.yml automatically):
+#   docker compose up -d --build          -> UI: http://localhost:3000
+#
+# Production (optimized images, nginx frontend, backend kept internal):
+#   docker compose -f docker-compose.yml up -d --build
+#   -> UI + API gateway: http://localhost:${HTTP_PORT:-8080}
+#
+# Optional Redis cache/session store:
+#   docker compose --profile redis up -d
+#
+# Secrets come from .env (copy .env.example -> .env first).
+# =============================================================================
+name: zahabi
+
+services:
+  # ---------------------------------------------------------------------------
+  # 1) DATABASE — MySQL 8 (Drizzle ORM / mysql2 speak MySQL natively).
+  #    Persistent named volume => financial data survives restarts/upgrades.
+  #    NOT published to the host in production (internal network only).
+  # ---------------------------------------------------------------------------
+  db:
+    image: mysql:8.4
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_NAME:-zahabi}
+      MYSQL_USER: ${DB_USER:-zahabi}
+      MYSQL_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required - copy .env.example to .env}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?DB_ROOT_PASSWORD is required - copy .env.example to .env}
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --explicit_defaults_for_timestamp=ON
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 40s
+    networks:
+      - zahabi
+
+  # ---------------------------------------------------------------------------
+  # 2) MIGRATE — one-shot job applying the drizzle/ SQL journal before the
+  #    API starts (backend depends_on: service_completed_successfully).
+  # ---------------------------------------------------------------------------
+  migrate:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      target: migrate
+    image: zahabi-migrate
+    restart: "no"
+    environment:
+      # NOTE: keep DB_PASSWORD URL-safe (letters/digits only) or URL-encode it.
+      DATABASE_URL: mysql://${DB_USER:-zahabi}:${DB_PASSWORD}@${DB_HOST:-db}:${DB_PORT_INTERNAL:-3306}/${DB_NAME:-zahabi}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - zahabi
+
+  # ---------------------------------------------------------------------------
+  # 3) BACKEND — Express + tRPC API engine (production bundle, non-root user).
+  #    Listens on 5000 INSIDE the network only; nginx fronts it in production.
+  # ---------------------------------------------------------------------------
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      target: production
+    image: zahabi-backend
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      DATABASE_URL: mysql://${DB_USER:-zahabi}:${DB_PASSWORD}@${DB_HOST:-db}:${DB_PORT_INTERNAL:-3306}/${DB_NAME:-zahabi}
+      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET is required (min 32 chars) - see .env.example}
+      OWNER_OPEN_ID: ${OWNER_OPEN_ID:-}
+      OAUTH_SERVER_URL: ${OAUTH_SERVER_URL:-https://api.manus.im}
+      VITE_APP_ID: ${VITE_APP_ID:-}
+      BUILT_IN_FORGE_API_URL: ${BUILT_IN_FORGE_API_URL:-}
+      BUILT_IN_FORGE_API_KEY: ${BUILT_IN_FORGE_API_KEY:-}
+      # Prepared for future caching/session use (app currently ignores it).
+      REDIS_URL: redis://redis:6379/0
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:5000/api/trpc/auth.me || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 25s
+    networks:
+      - zahabi
+
+  # ---------------------------------------------------------------------------
+  # 4) FRONTEND — nginx serving the built SPA + reverse-proxying /api to the
+  #    backend. Hidden behind the "nginx" profile in development mode
+  #    (docker-compose.override.yml) because the dev backend embeds Vite.
+  # ---------------------------------------------------------------------------
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      target: production
+      args:
+        VITE_APP_ID: ${VITE_APP_ID:-}
+        VITE_APP_TITLE: ${VITE_APP_TITLE:-الذهبي للمحاسبة}
+        VITE_ANALYTICS_ENDPOINT: ${VITE_ANALYTICS_ENDPOINT:-}
+        VITE_ANALYTICS_WEBSITE_ID: ${VITE_ANALYTICS_WEBSITE_ID:-}
+    image: zahabi-frontend
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT:-8080}:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1/healthz || exit 1"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+    networks:
+      - zahabi
+
+  # ---------------------------------------------------------------------------
+  # 5) REDIS (optional) — enable with:  docker compose --profile redis up -d
+  #    AOF persistence so cached sessions survive restarts.
+  # ---------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    profiles: ["redis"]
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "256mb", "--maxmemory-policy", "allkeys-lru"]
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks:
+      - zahabi
+
+# =============================================================================
+# VOLUMES & NETWORKS
+# =============================================================================
+volumes:
+  db_data:
+    name: zahabi_db_data
+  redis_data:
+    name: zahabi_redis_data
+
+networks:
+  zahabi:
+    name: zahabi-net
+    driver: bridge

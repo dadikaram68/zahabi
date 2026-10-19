@@ -1,0 +1,73 @@
+# =============================================================================
+# .dockerignore — applies to the REPO ROOT build context used by BOTH
+# frontend/Dockerfile and backend/Dockerfile (dockerignore is resolved at the
+# context root, so per-subfolder .dockerignore files would have no effect).
+# =============================================================================
+
+# Dependencies (reinstalled inside the image, never copied from the host)
+node_modules
+.pnpm-store
+
+# Build outputs (regenerated inside the image)
+dist
+build
+*.tsbuildinfo
+
+# Secrets & local env — never bake credentials into images
+.env
+.env.*
+!.env.example
+
+# VCS / IDE / OS
+.git
+.gitignore
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+
+# Logs & debug artifacts
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+audit-packages*.txt
+audit-pkg*.txt
+audit-severities.txt
+audit_tests.log
+client-tests.txt
+test-files.txt
+lock-pkg-check.txt
+nanoid-why.txt
+node-modules-check.txt
+node-tar-why.txt
+vitest-full-output*.txt
+dev-server.err.log
+dev-server.log
+coverage
+
+# Manus platform artifacts (debug collectors / checkpoints / runtime)
+.manus
+.manus-logs
+.project-config.json
+.gitkeep
+
+# Local tooling / scratch files that are not needed to build or run
+Aldhahabi-Accounting-source-2026-10-15
+Aldhahabi-Accounting-source-2026-10-15.zip
+package.bak.json
+package.dump
+fix_trpc.js
+probe-login.mjs
+probe-session.mjs
+template.json
+
+# Documentation (md/pdf) — not needed inside runtime images
+*.md
+*.pdf
+!README.md
+
+# Tests (not executed during image build)
+**/*.test.ts
+**/*.test.tsx
+vitest.config.ts

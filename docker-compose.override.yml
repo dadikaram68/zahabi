@@ -1,0 +1,54 @@
+# =============================================================================
+# DEVELOPMENT OVERRIDES — merged automatically by `docker compose up`.
+# Run production with:  docker compose -f docker-compose.yml up -d
+#
+# Dev experience:
+#   - backend runs `tsx watch` with the source bind-mounted -> hot reload for
+#     BOTH the API and the UI (the dev server embeds Vite middleware).
+#   - open http://localhost:3000  (APP_PORT)
+#   - the nginx frontend is hidden behind the "nginx" profile in dev; enable
+#     it with `docker compose --profile nginx up` to test the prod split.
+# =============================================================================
+services:
+  db:
+    # Convenience: expose MySQL to host tooling (create-admin.ts, GUI clients).
+    # Bound to 127.0.0.1 only. Override the port with DB_PORT in .env.
+    ports:
+      - "127.0.0.1:${DB_PORT:-3306}:3306"
+
+  backend:
+    build:
+      target: dev
+    image: zahabi-backend:dev
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - "${APP_PORT:-3000}:3000"
+    # Dev listens on 3000 (PORT above), but the base healthcheck probes the
+    # production port 5000 -> override it or the container is marked unhealthy.
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:3000/api/trpc/auth.me || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 25s
+    volumes:
+      # Mount the whole workspace for hot reload...
+      - .:/app
+      # ...but keep the container's Linux node_modules & pnpm store intact
+      # (the host's node_modules is a Windows pnpm symlink farm — never mix).
+      - backend_node_modules:/app/node_modules
+      - backend_pnpm_store:/pnpm-store
+    stdin_open: true
+    tty: true
+
+  frontend:
+    # The dev backend serves the UI itself through Vite middleware, so the
+    # nginx SPA container is off by default. Bring it back with:
+    #   docker compose --profile nginx up -d --build
+    profiles: ["nginx"]
+
+volumes:
+  backend_node_modules:
+  backend_pnpm_store:

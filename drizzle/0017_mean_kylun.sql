@@ -1,5 +1,4 @@
 ALTER TABLE `accounting_attendance` ADD `approvalStatus` enum('draft','pendingApproval','approved') DEFAULT 'draft' NOT NULL;--> statement-breakpoint
-ALTER TABLE `accounting_attendance` ADD `approvalStatus` enum('draft','pendingApproval','approved');--> statement-breakpoint
 UPDATE `accounting_attendance` SET `approvalStatus` = 'approved' WHERE `approvalStatus` IS NULL;--> statement-breakpoint
 ALTER TABLE `accounting_attendance` MODIFY `approvalStatus` enum('draft','pendingApproval','approved') NOT NULL DEFAULT 'draft';--> statement-breakpoint
 ALTER TABLE `accounting_attendance` ADD `createdBy` int;--> statement-breakpoint
