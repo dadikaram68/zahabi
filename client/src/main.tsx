@@ -47,6 +47,7 @@ const trpcClient = trpc.createClient({
         // (Safari ITP / private browsing / WebView), the runtime mirrors the
         // session into sessionStorage so we can forward it as a Bearer token.
         // The regular OAuth cookie flow keeps working and takes priority server-side.
+        const out: Record<string, string> = {};
         try {
           const raw = sessionStorage.getItem("manus-cookie");
           if (raw) {
@@ -54,13 +55,27 @@ const trpcClient = trpc.createClient({
             const pair = raw.split(";").find(s => s.trim().startsWith(prefix));
             const token = pair?.trim().slice(prefix.length);
             if (token) {
-              return { Authorization: `Bearer ${token}` };
+              out.Authorization = `Bearer ${token}`;
             }
           }
         } catch {
           // sessionStorage unavailable
         }
-        return {};
+        // CSRF: all mutations (logout, data changes) require the x-csrf-token
+        // header to match the aldhahabi_csrf_token cookie. Without this the
+        // server rejects every mutation with "CSRF token missing" and logout
+        // silently fails (user appears stuck logged in).
+        try {
+          const match = document.cookie
+            .split(";")
+            .map(p => p.trim())
+            .find(p => p.startsWith("aldhahabi_csrf_token="));
+          const csrf = match?.slice("aldhahabi_csrf_token=".length);
+          if (csrf) out["x-csrf-token"] = decodeURIComponent(csrf);
+        } catch {
+          // cookies unavailable
+        }
+        return out;
       },
       fetch(input, init) {
         return globalThis.fetch(input, {
