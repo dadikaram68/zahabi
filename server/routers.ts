@@ -72,9 +72,9 @@ export const appRouter = router({
       const csrfCookieOptions = getCsrfCookieOptions(ctx.req);
       const token = ctx.req.headers.cookie?.split(";").map(part => part.trim()).find(part => part.startsWith(INTERNAL_SESSION_COOKIE + "="))?.slice(INTERNAL_SESSION_COOKIE.length + 1);
       if (token) await revokeInternalSession(token);
-      ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions });
-      ctx.res.clearCookie(INTERNAL_SESSION_COOKIE, { ...cookieOptions });
-      ctx.res.clearCookie(CSRF_COOKIE_NAME, { ...csrfCookieOptions });
+      ctx.res.clearCookie(COOKIE_NAME, { ...cookieOptions, maxAge: -1 });
+      ctx.res.clearCookie(INTERNAL_SESSION_COOKIE, { ...cookieOptions, maxAge: -1 });
+      ctx.res.clearCookie(CSRF_COOKIE_NAME, { ...csrfCookieOptions, maxAge: -1 });
       return {
         success: true,
       } as const;
