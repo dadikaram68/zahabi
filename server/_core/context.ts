@@ -16,8 +16,7 @@ export async function createContext(
 
   try {
     user = await sdk.authenticateRequest(opts.req);
-  } catch {
-    // OAuth session absent/invalid — fall back to internal (username/password) session.
+  } catch (error) {
     user = await authenticateInternalRequest(opts.req);
   }
 
